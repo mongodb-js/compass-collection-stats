@@ -46,6 +46,13 @@ const CollectionStatsStore = Reflux.createStore({
         this.onCollectionChanged();
       }
     });
+    appRegistry.on('instance-refreshed', () => {
+      const ns = appRegistry.getStore('App.NamespaceStore').ns;
+      if (ns.indexOf('.' === 0)) {
+        this.onDocumentsModified();
+        this.onCollectionChanged();
+      }
+    });
   },
 
   /**
